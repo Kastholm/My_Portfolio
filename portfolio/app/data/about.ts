@@ -1,3 +1,6 @@
 export const aboutData = [
-'Fra jeg begyndte med webudvikling og design af brugergrænseflader, blev jeg grebet af friheden til at skabe, kun begrænset af min egen færdighed. Med dyb passion og dedikation har jeg formet min karriere i dette spændende felt. Jeg har opnået omfattende viden inden for programmeringssprog og webudviklingsmetoder, hvilket gør mig i stand til at bygge og designe hjemmesider og applikationer på mange forskellige måder.'
+'Siden jeg begyndte med webudvikling og design af brugergrænseflader, har jeg været drevet af friheden til at skabe – kun begrænset af min egen kunnen. Med passion og dedikation har jeg opbygget en stærk baggrund inden for programmeringssprog og moderne webudviklingsmetoder, hvilket gør mig i stand til at udvikle og designe alt fra enkle hjemmesider til komplekse applikationer.',
+'',
+'',
+'I dag retter jeg mit fokus mod backend-udvikling og fullstack-løsninger, hvor jeg kombinerer frontend-erfaring med en stigende ekspertise i Python. Mit mål er at udvikle komplette applikationer og specialiserede programmer, der løser konkrete problemer og skaber værdi – fra idé til færdigt produkt.'
 ];

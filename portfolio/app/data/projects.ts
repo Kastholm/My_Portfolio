@@ -1,25 +1,86 @@
+import { client } from "../lib/sanityclient";
+
 export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  dateRange: string;
-  technologies: string[];
-  websiteUrl?: string;
-  sourceUrl?: string;
+  _id: string;
+  titel: string;
+  slug: string | "";
+  resume: string;
+  indhold: string[];
+  billede: {
+    _type: string;
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
+  dato: string;
+  programmeringssprog: {
+    _id: string;
+    navn: string;
+    logo: any;
+  }[];
+  websiteLink?: string;
+  githubLink?: string;
 }
 
-const projects: Project[] = [
-  {
-    id: '1',
-    title: 'Flexnet',
-    description: 'Fullstack web application til et spansk telekommunikationsfirma. Platformen giver kunder mulighed for at overvåge/købe produket, administrere deres abonnementer og betalinger online.',
-    imageUrl: '/img/projects/flexnet.png',
-    dateRange: 'Feb 2024 - Jun 2024',
-    technologies: ['Next.js', 'TypeScript', 'TailwindCSS', 'Authentication', 'Stripe'],
-    websiteUrl: 'https://flexnet.es/',
-    sourceUrl: '/img/projects/flexnet.png',
-  },
+export const getProjects = async () => {
+  const projects = await client.fetch(`*[_type == "projekter"]{
+    _id,
+    titel,
+    "slug": slug.current,
+    resume,
+    indhold,
+    billede,
+    dato,
+    githubLink,
+    websiteLink,
+    "programmeringssprog": programmeringssprog[]->{
+      _id,
+      navn,
+      logo
+    }
+  }`);
+  return projects;
+};
+
+export const getProject = async (slug: string) => {
+  console.log("Searching for project with slug:", slug);
+  
+  try {
+    const projects = await client.fetch(`*[_type == "projekter" && slug.current == "${slug}"]{
+      _id,
+      titel,
+      "slug": slug.current,
+      resume,
+      indhold,
+      billede,
+      dato,
+      githubLink,
+      websiteLink,
+      "programmeringssprog": programmeringssprog[]->{
+        _id,
+        navn,
+        logo
+      }
+    }`);
+    
+    console.log("Query result:", projects);
+    console.log("Projects length:", projects?.length);
+    
+    // Return the first (and should be only) project, or null if not found
+    return projects && projects.length > 0 ? projects[0] : null;
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    return null;
+  }
+};
+
+
+
+
+
+/* const projects: Project[] = [
+
   {
     id: '2',
     title: 'Grusvej',
@@ -29,26 +90,6 @@ const projects: Project[] = [
     technologies: ['Nuxt.js', 'TypeScript', 'TailwindCSS'],
     websiteUrl: 'https://grusvej.dk',
     sourceUrl: 'https://github.com/Kastholm/GrusvejDK',
-  },
-  {
-    id: '3',
-    title: 'KOLD Festival',
-    description: 'KOLD Festival præsenterer en dynamisk platform, der fremhæver festivalens brand og events. Bygget med Nuxt.js, TypeScript, GSAP, TailwindCSS og API-integrationer.',
-    imageUrl: '/img/projects/koldfestival.png',
-    dateRange: 'Feb 2023 - Aug 2023',
-    technologies: ['Nuxt.js', 'TypeScript', 'GSAP', 'TailwindCSS', 'API'],
-    websiteUrl: 'https://koldfestival.dk',
-    sourceUrl: 'https://github.com/andersravn32/kold-festival',
-  },
-  {
-    id: '4',
-    title: 'Pengehjørnet',
-    description: 'Pengehjørnet er et fullstack nyhedsmedie, der henter artikler via API fra et skræddersyet Sanity-setup. Bygget med Next.js for optimal performance og SEO-optimering.',
-    imageUrl: '/img/projects/mgdk/penge.png',
-    dateRange: 'Mar 2024 - I dag',
-    technologies: ['Next.js', 'TypeScript', 'React', 'Sanity', 'TailwindCSS', 'API', 'SEO', 'Programmatic'],
-    websiteUrl: 'https://pengehjoernet.dk/',
-    sourceUrl: 'https://github.com/Media-Group-Denmark/APP',
   },
   {
     id: '5',
@@ -125,4 +166,4 @@ const projects: Project[] = [
   },
 ];
 
-export const getProjects = () => projects;
+export const getProjects = () => projects; */
