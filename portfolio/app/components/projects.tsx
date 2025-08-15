@@ -18,13 +18,13 @@ const Projects: React.FC = async () => {
           Projekter
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400 text-center mb-10">
-          Jeg elsker at designe hjemmesider. Her er nogen af dem.
+          Her er nogen af mine bedste og mest komplekse projekter.
         </p>
         <div
           id="top"
           className={`grid gap-6 sm:grid-cols-1 md:grid-cols-2 transition-[5s] lg:grid-cols-2 `}
         >
-          {projects.map((project: Project) => (
+          {projects.sort((a: Project, b: Project) => new Date(b.dato).getTime() - new Date(a.dato).getTime()).map((project: Project) => (
             <div
               key={project._id}
               className="bg-white dark:bg-neutral-950 rounded-lg overflow-hidden border border-neutral-300 dark:border-neutral-800 flex flex-col"
@@ -49,7 +49,7 @@ const Projects: React.FC = async () => {
                   {project.resume}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                {/* <div className="flex flex-wrap gap-2 mb-4">
                   {project.programmeringssprog?.map((tech, index) => (
                     <span
                       key={tech._id}
@@ -59,7 +59,7 @@ const Projects: React.FC = async () => {
                     </span>
                   ))}
                   
-                </div>
+                </div> */}
 
                 <div className="mt-auto grid gap-2 text-xs font-medium">
                 <a
