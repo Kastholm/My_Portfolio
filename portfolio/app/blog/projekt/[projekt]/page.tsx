@@ -8,27 +8,8 @@ export default async function ProjektPage({ params }: { params: { projekt: strin
   const project = await getProject(params.projekt);
   console.log("Project data:", project);
 
-  // If project is not found, show 404
-  if (!project) {
-    return (
-      <section className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <div className="max-w-4xl mx-auto px-4 py-16">
-          <div className="text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-              Projekt ikke fundet
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Projektet med slug "{params.projekt}" kunne ikke findes.
-            </p>
-          </div>
-        </div>
-        <Dock />
-      </section>
-    );
-  }
-
   return (
-    <section className="min-h-screen articleText ">
+    <section className="min-h-screen articleText">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="mb-12">
