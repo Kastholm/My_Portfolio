@@ -11,92 +11,98 @@ export default async function ProjektPage({ params }: { params: { projekt: strin
   // If project is not found, show 404
   if (!project) {
     return (
-      <section className="bg-[#fff] articleText max-w-[1000px] dark:bg-main_color_dark border-b-2 border-gray-100 md:pt-4">
-        <section className="m-auto">
-          <div className="py-3 rounded-lg lg:py-8 articleSection">
-            <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6">
-              <article className="w-full rounded-lg">
-                <section>
-                  <header>
-                    <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
-                      Projekt ikke fundet
-                    </h1>
-                  </header>
-                  <p className="text-lg">Projektet med slug "{params.projekt}" kunne ikke findes.</p>
-                </section>
-              </article>
-            </div>
+      <section className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="max-w-4xl mx-auto px-4 py-16">
+          <div className="text-center">
+            <h1 className="text-4xl lg:text-6xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+              Projekt ikke fundet
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              Projektet med slug "{params.projekt}" kunne ikke findes.
+            </p>
           </div>
-        </section>
+        </div>
         <Dock />
       </section>
     );
   }
 
   return (
-    <section className="bg-[#fff] max-w-[1000px] dark:bg-main_color_dark border-b-2 border-gray-100 md:pt-4">
-      <section className="m-auto">
-        <div className="py-3 rounded-lg lg:py-8 articleSection">
-          <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6">
-            <article key={project._id} className="w-full rounded-lg">
-              <section>
-                <header>
-                  <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
-                    {project.titel}
-                  </h1>
-                </header>
-                <footer className="py-1 lg:py-4">
-                  <div className="items-center p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
-                    <div className="flex gap-x-2 lg:mt-2 align-middle">
-                      <p className="text-fade_color_light dark:text-fade_color_dark font-semibold text-xs">
-                        {project.dato}
-                      </p>
-                    </div>
-                    {project.programmeringssprog && project.programmeringssprog.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {project.programmeringssprog.map((tech: Project['programmeringssprog'][number]) => (
-                          <span
-                            key={tech._id}
-                            className="bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-300 text-sm font-medium py-1 px-2 rounded"
-                          >
-                            {tech.navn}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </footer>
+    <section className="min-h-screen articleText ">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Hero Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
+              {project.titel}
+            </h1>
+            <div className="flex items-center justify-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-6">
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {project.dato}
+              </span>
+            </div>
+            
+            {/* Tech Stack */}
+            {project.programmeringssprog && project.programmeringssprog.length > 0 && (
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                {project.programmeringssprog.map((tech: Project['programmeringssprog'][number]) => (
+                  <span
+                    key={tech._id}
+                    className="bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium py-2 px-4 rounded-full shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-200"
+                  >
+                    {tech.navn}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
 
-                {project.billede && project.billede.asset && (
-                  <aside className="relative min-h-[10em] md:min-h-[25em]">
-                    <figure className="absolute top-0 left-0 right-0 h-[10em] md:h-[25em] overflow-clip">
-                      <img
-                        src={urlFor(project.billede)
-                          .format("webp")
-                          .quality(100)
-                          .url()}
-                        alt={`Billede af ${project.titel}`}
-                        className="w-full h-auto rounded-t-lg object-cover"
-                      />
-                      <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-                        Foto: {project.titel}
-                      </figcaption>
-                    </figure>
-                  </aside>
-                )}
+          {/* Featured Image */}
+          {project.billede && project.billede.asset && (
+            <div className="relative mb-12">
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={urlFor(project.billede)
+                    .format("webp")
+                    .quality(100)
+                    .url()}
+                  alt={`Billede af ${project.titel}`}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+              <div className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white text-sm px-3 py-1 rounded-full backdrop-blur-sm">
+                Foto: {project.titel}
+              </div>
+            </div>
+          )}
+        </div>
 
-                <h2 className="text-md lg:text-md font-bold my-2 mb-4 lg:my-4 px-3">
-                  {project.resume}
-                </h2>
-              </section>
+        {/* Project Summary */}
+        {project.resume && (
+          <div className="mb-12">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Projektoversigt
+              </h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                {project.resume}
+              </p>
+            </div>
+          </div>
+        )}
 
-              <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
-                <PortableText value={project.indhold} />
-              </section>
-            </article>
+        {/* Main Content */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="p-8 lg:p-12">
+            <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:dark:text-gray-100 prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-strong:text-gray-900 prose-strong:dark:text-gray-100 prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-li:text-gray-700 prose-li:dark:text-gray-300 prose-blockquote:border-l-blue-500 prose-blockquote:bg-gray-50 prose-blockquote:dark:bg-gray-700 prose-blockquote:p-4 prose-blockquote:rounded-r-lg">
+              <PortableText value={project.indhold} />
+            </div>
           </div>
         </div>
-      </section>
+      </div>
       <Dock />
     </section>
   );

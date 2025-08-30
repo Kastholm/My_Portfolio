@@ -77,7 +77,7 @@ function Intro() {
           >
             <Zoom>
               <img
-                src="/img/me.jpg"
+                src="/img/me.png"
                 width={90}
                 height={90}
                 alt="AS"

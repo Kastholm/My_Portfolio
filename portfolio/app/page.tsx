@@ -16,7 +16,7 @@ function HomePage() {
     <About/>
     <Experience/>
     <Education/>
-    <Skills/>
+    {/* <Skills/> */}
     <Projects/>
     {/* <Contact/> */}
     <Dock/>
