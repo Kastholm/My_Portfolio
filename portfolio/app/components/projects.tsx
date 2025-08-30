@@ -49,7 +49,7 @@ const Projects: React.FC = async () => {
                   {project.resume}
                 </p>
 
-                {/* <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.programmeringssprog?.map((tech, index) => (
                     <span
                       key={tech._id}
@@ -59,7 +59,7 @@ const Projects: React.FC = async () => {
                     </span>
                   ))}
                   
-                </div> */}
+                </div>
 
                 <div className="mt-auto grid gap-2 text-xs font-medium">
                 <a
