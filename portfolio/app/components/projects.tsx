@@ -45,7 +45,7 @@ const Projects: React.FC = async () => {
                 <p className="mb-2 text-xs text-neutral-700 dark:text-neutral-300">
                   {project.dato}
                 </p>
-                <p className="text-neutral-600 dark:text-neutral-400 mb-4 text-xs">
+                <p className="text-neutral-600 dark:text-neutral-300 mb-4 text-xs">
                   {project.resume}
                 </p>
 
