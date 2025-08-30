@@ -88,3 +88,5 @@ export default async function ProjektPage({ params }: { params: { projekt: strin
     </section>
   );
 }
+
+export const runtime = "edge";
