@@ -13,8 +13,8 @@ export default async function BlogPage() {
   return (
     <section className="mx-auto rounded-xl  md:max-w-7xl px-3 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-2 md:mt-6 pb-1">
       <h1 className="lineHeader text-center text-[1.95rem] font-bold md:mb-4">
-        <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-          Mine blogs
+        <span className="text-white px-4 py-1 uppercase">
+          Blog
         </span>
       </h1>
 
